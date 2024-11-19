@@ -5,9 +5,70 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Forever</title>
+    <style>
+      /* Chat bubble style */
+      #chatBubble {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background-color: #0d64c0;
+        border-radius: 50%;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        cursor: pointer;
+        z-index: 9999; /* Ensure it stays on top */
+      }
+
+      /* Initially hide the iframe */
+      #chatbot {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        min-height: 700px;
+        border: none;
+        display: none; /* Hide by default */
+        z-index: 10000; /* Ensure it's on top of the bubble */
+      }
+    </style>
   </head>
   <body>
+
+    <!-- Fullscreen iframe for chatbot, initially hidden -->
+    <iframe
+      id="chatbot"
+      src="https://www.chatbase.co/chatbot-iframe/yMOrGNO9Z6nHuXJ5XEoGi"
+      frameborder="0"
+    ></iframe>    
+
+    <script>
+      // Show the chatbot when the chat bubble is clicked
+      document.getElementById("chatBubble").onclick = function() {
+        var chatbotIframe = document.getElementById("chatbot");
+        chatbotIframe.style.display = chatbotIframe.style.display === "none" || chatbotIframe.style.display === "" ? "block" : "none";
+      };
+
+      window.embeddedChatbotConfig = {
+        chatbotId: "yMOrGNO9Z6nHuXJ5XEoGi",
+        domain: "www.chatbase.co"
+      };
+    </script>
+
+    <script
+      src="https://www.chatbase.co/embed.min.js"
+      chatbotId="yMOrGNO9Z6nHuXJ5XEoGi"
+      domain="www.chatbase.co"
+      defer
+    ></script>
+
     <div id="root"></div>
+
     <script type="module" src="/src/main.jsx"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"> </script>
   </body>
